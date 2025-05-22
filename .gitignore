@@ -1,6 +1,7 @@
 # Ignore Node stuff
 node_modules/
 .env
+config.env
 
 # Ignore Python stuff (ถ้ามี)
 __pycache__/
