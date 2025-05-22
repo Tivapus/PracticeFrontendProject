@@ -1,0 +1,90 @@
+@startuml user
+actor User
+participant "Frontend" as FE
+participant "<<router>>\n auth" as Router
+participant "<<middleware>>\nAuth" as Auth
+participant "<<controllers>>\n User" as Controller
+participant "<<models>>\nUser" as UserModel
+participant "<<mongoDB>>\nUsers" as UsersDB
+
+group register
+User -> FE : Fill register form
+FE -> Router : POST /api/v1/auth/register
+Router -> Controller : register(req)
+Controller -> UserModel : create({ name, email, password, tel, role })
+UserModel -> UsersDB : Save user to database
+UsersDB --> UserModel : Acknowledgment
+UserModel --> Controller : created user
+Controller -> UserModel : user.getSignedJwtToken()
+UserModel --> Controller : JWT token
+Controller --> Router : res.json({ user info, token })
+Router --> FE : show success
+end
+
+== ==
+
+group login
+User -> FE : Fill login form
+FE -> Router : POST /api/v1/auth/login
+Router -> Controller : login(req)
+Controller -> UserModel : findOne({ email }).select("+password")
+UserModel -> UsersDB : Query user by email
+UsersDB --> UserModel : user doc
+UserModel --> Controller : user doc
+Controller -> UserModel : user.matchPassword(password)
+UserModel --> Controller : true/false
+alt valid
+  Controller -> UserModel : user.getSignedJwtToken()
+  UserModel --> Controller : JWT token
+  Controller --> Router : res.json({ user info, token })
+else invalid
+  Controller --> Router : res.status(401).json("Invalid credentials")
+end
+Router --> FE : show result
+end
+
+== ==
+
+group getMe
+User -> FE : Go to profile
+FE -> Router : GET /api/v1/auth/me
+Router -> Auth : validate JWT
+Auth --> Router : req.user
+Router -> Controller : getMe(req)
+Controller -> UserModel : findById(req.user.id)
+UserModel -> UsersDB : Query user by ID
+UsersDB --> UserModel : user
+UserModel --> Controller : user
+Controller --> Router : res.json(user)
+Router --> FE : show profile
+end
+
+== ==
+
+group logout
+User -> FE : Click logout
+FE -> Router : GET /api/v1/auth/logout
+Router -> Controller : logout(req)
+Controller -> Router : res.cookie("token", "none", { expires })
+Router --> FE : clear token and redirect
+end
+
+== ==
+
+group updateProfile
+User -> FE : Edit profile
+FE -> Router : PUT /api/v1/auth/updateProfile
+Router -> Auth : validate JWT
+Auth --> Router : req.user
+Router -> Controller : updateProfile(req)
+Controller -> UserModel : findByIdAndUpdate(req.user.id, req.body)
+UserModel -> UsersDB : Update user in database
+UsersDB --> UserModel : updated user
+UserModel --> Controller : updated user
+Controller -> UserModel : user.getSignedJwtToken()
+UserModel --> Controller : JWT token
+Controller --> Router : res.json({ updated user, token })
+Router --> FE : show success
+end
+
+@enduml

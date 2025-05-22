@@ -1,0 +1,10 @@
+# Ignore Node stuff
+node_modules/
+.env
+
+# Ignore Python stuff (ถ้ามี)
+__pycache__/
+*.pyc
+
+# Ignore system stuff
+.DS_Store
