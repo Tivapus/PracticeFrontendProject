@@ -1,0 +1,59 @@
+#navbar {
+    display : grid;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: 80px auto;
+    background-color: #333;
+
+    padding: 0 2rem; /* ซ้าย-ขวาเท่ากัน */
+}
+#navbar .-logo {
+    font-weight: bold;
+    color: #fff;
+}
+#navbar .-logo-text{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+#navbar .-logo:hover {
+    cursor: pointer;
+}
+
+#navbar .-end{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar .-company {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+}
+#navbar .-company:hover {
+    cursor: pointer;
+    color: #6c6c6c;
+}
+
+#navbar .-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    color: #fff;
+}
+
+#navbar .-profile:hover {
+    cursor: pointer;
+    background-color: #6c6c6c;
+}
