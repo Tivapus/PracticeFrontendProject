@@ -3,15 +3,16 @@
     align-items: center;
     justify-content: space-between;
     grid-template-columns: 80px auto;
-    background-color: #333;
+    background-color: #5d8eb8;
 
-    padding: 0 2rem; /* ซ้าย-ขวาเท่ากัน */
+    padding: 0 3rem; /* ซ้าย-ขวาเท่ากัน */
 }
 #navbar .-logo {
     font-weight: bold;
     color: #fff;
 }
 #navbar .-logo-text{
+    font-size: large;
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -26,7 +27,7 @@
     align-items: center;
     justify-content: space-between;
     list-style: none;
-    gap: 2rem;
+    gap: 4rem;
     margin: 0;
     padding: 0;
 }
@@ -50,10 +51,15 @@
     width: 40px;
     height: 40px;
     border-radius: 100%;
-    color: #fff;
 }
 
 #navbar .-profile:hover {
     cursor: pointer;
     background-color: #6c6c6c;
+}
+
+#navbar .-profile img {
+    width: 100%;
+    height: 100%;
+    border-radius: 80%;
 }

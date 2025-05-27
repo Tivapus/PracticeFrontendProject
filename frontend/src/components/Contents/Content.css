@@ -1,0 +1,44 @@
+#content {
+    display : grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    padding: 0 20px;
+    gap: 20px;
+    grid-auto-rows: auto;
+    background-color: #393939;
+    overflow-y: auto;
+    align-items: start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+}
+
+#content .post {
+    border: 1px solid #b4b4b4;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#content .post-header {
+    display: flex;
+    align-items: center;
+    font-size: larger;
+    font-weight: bold;
+}
+
+#content .post-body {
+    margin-top: 10px;
+    font-size: medium;
+    line-height: 1.5; /* เพิ่มระยะห่างระหว่างบรรทัด */
+}
+
+#content .description {
+    overflow: hidden;
+}
+
+#content .end-body {
+    display: flex;
+    justify-content: space-between; /* ซ้าย-ขวา */
+    align-items: center; /* จัดให้อยู่แนวเดียวกันกลางๆ */
+}
